@@ -8,7 +8,7 @@ RUN npm run build
 
 # production env
 FROM bitnami/nginx:latest
-
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /usr/src/app/build /app
 
 EXPOSE 8080
