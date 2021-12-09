@@ -13,5 +13,5 @@ COPY --from=builder /usr/src/app/build /app
 USER 1001
 
 EXPOSE 8080
-ENTRYPOINT ["/app-entrypoint.sh"]
+
 CMD ["nginx", "-g", "daemon off;"]
