@@ -1,13 +1,15 @@
 # build env
-FROM node:latest as build
-WORKDIR /app
+FROM node:latest as builder
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . ./
 RUN npm run build
 
 # production env
-FROM nginx:latest
-COPY --from=build /app/build /usr/share/nginx/html
+FROM bitnami/nginx:latest
+
+COPY --from=builder /usr/src/app/build /app
+
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
