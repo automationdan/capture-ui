@@ -2,6 +2,7 @@
 FROM node:latest as builder
 WORKDIR /usr/src/app
 COPY package*.json ./
+ENV REACT_APP_DCAPPROXY=http://datacap-api:8080
 RUN npm ci
 COPY . ./
 RUN npm run build

@@ -229,9 +229,11 @@ export default class UploadFiles extends Component {
 
     </Column>
       <Column>
+
       <h1>Document Details</h1>
         {this.state.docStatus==="Processing" &&
           <InlineLoading description="Processing..." />
+
 
         }
         {this.state.message==="Document Processed" &&

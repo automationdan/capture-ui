@@ -1,37 +1,32 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React from "react";
+import ReactDOM from "react-dom";
 
-const Timer = (props:any) => {
-    const {initialMinute = 0,initialSeconds = 0} = props;
-    const [ minutes, setMinutes ] = useState(initialMinute);
-    const [seconds, setSeconds ] =  useState(initialSeconds);
-    useEffect(()=>{
-    let myInterval = setInterval(() => {
-            if (seconds > 0) {
-                setSeconds(seconds - 1);
-            }
-            if (seconds === 0) {
-                if (minutes === 0) {
-                    clearInterval(myInterval)
-                } else {
-                    setMinutes(minutes - 1);
-                    setSeconds(59);
-                }
-            }
-        }, 1000)
-        return ()=> {
-            clearInterval(myInterval);
-          };
-    });
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      elapsedTime: null
+    };
 
+    this.countUp = this.countUp.bind(this);
+    this.startCounting = this.startCounting.bind(this);
+  }
+
+  startCounting() {
+    setInterval(this.countUp, 1000);
+  }
+
+  countUp() {
+    this.setState(({ elapsedTime }) => ({ elapsedTime: elapsedTime + 1 }));
+  }
+
+  render() {
     return (
-        <div>
-        { minutes === 0 && seconds === 0
-            ? null
-            : <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1>
-        }
-        </div>
-    )
+      <div>
+        <div>{this.state.elapsedTime}</div>
+      </div>
+    );
+  }
 }
 
 export default Timer;
