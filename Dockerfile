@@ -10,6 +10,8 @@ RUN npm run build
 FROM bitnami/nginx:latest
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /usr/src/app/build /app
+USER 1001
 
 EXPOSE 8080
+ENTRYPOINT ["/app-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
