@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import UploadService from "../../services/upload-files.service";
-import DocView from '../DocView';
+//import DocView from '../DocView';
 import { Button,FileUploaderDropContainer,Breadcrumb,BreadcrumbItem,InlineLoading } from 'carbon-components-react';
 import ResultsList from './ResultsList'
 import { Grid, Row, Column } from 'carbon-components-react';
-import Timer from "../Timer"
+import FileViewer from 'react-file-viewer-plugins-v3';
+//import Timer from "../Timer"
 
 export default class UploadFiles extends Component {
   constructor(props) {
@@ -108,6 +109,7 @@ export default class UploadFiles extends Component {
 
     }
   }
+
   upload() {
 
     let application = this.props.application
@@ -222,8 +224,8 @@ export default class UploadFiles extends Component {
       <h1>Document</h1>
     {this.state.docUrl !== undefined  &&
 
+    <FileViewer filePath={this.state.docUrl} />
 
-     <DocView src={this.state.docUrl} />
 
     }
 
